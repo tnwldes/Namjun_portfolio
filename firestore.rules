@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+        (request.auth.token.email == "fem7541@gmail.com" && request.auth.token.email_verified == true);
+    }
+
+    // Portfolio Items
+    match /portfolio/{itemId} {
+      allow read, list: if true;
+      allow write: if isAdmin();
+    }
+
+    // Settings
+    match /settings/{settingId} {
+      allow read, get, list: if true;
+      allow write: if isAdmin();
+    }
+  }
+}

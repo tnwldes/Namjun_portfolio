@@ -1,0 +1,44 @@
+{
+  "entities": {
+    "PortfolioItem": {
+      "title": "Portfolio Item",
+      "description": "A single portfolio project or work item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string", "enum": ["ppt", "detail", "md", "design"] },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "imageUrls": { "type": "array", "items": { "type": "string" } },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "toolsUsed": { "type": "array", "items": { "type": "string" } },
+        "learnings": { "type": "string" },
+        "link": { "type": "string" },
+        "date": { "type": "string" }
+      },
+      "required": ["id", "category", "title", "description", "imageUrls", "date"]
+    },
+    "SiteContent": {
+      "title": "Site Content",
+      "description": "Global website content and settings",
+      "type": "object",
+      "properties": {
+        "hero": { "type": "object" },
+        "about": { "type": "object" },
+        "resume": { "type": "object" },
+        "experience": { "type": "object" },
+        "strengths": { "type": "object" }
+      }
+    }
+  },
+  "firestore": {
+    "/portfolio": {
+      "schema": "PortfolioItem",
+      "description": "Collection of portfolio items"
+    },
+    "/settings/content": {
+      "schema": "SiteContent",
+      "description": "Global site content settings"
+    }
+  }
+}
